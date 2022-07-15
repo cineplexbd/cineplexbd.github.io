@@ -1,0 +1,57 @@
+{
+	"id": "70a13860-d4c4-4b90-9f19-4816596f77ba",
+	"name": "env_cineplexbd",
+	"values": [
+		{
+			"key": "ticket_auth_token",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "location_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "show_date",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "movie_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "program_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "web.url",
+			"value": "https://cineplex-web-api.cineplexbd.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ticket.url",
+			"value": "https://cineplex-ticket-api.cineplexbd.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "web_auth_token",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-07-15T10:37:56.638Z",
+	"_postman_exported_using": "Postman/9.24.2"
+}

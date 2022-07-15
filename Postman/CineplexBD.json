@@ -1,0 +1,733 @@
+{
+	"info": {
+		"_postman_id": "9b6a51a7-ddb9-4dc5-9ea2-e8636cc069b1",
+		"name": "CineplexBD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4905390"
+	},
+	"item": [
+		{
+			"name": "All",
+			"item": [
+				{
+					"name": "/get web token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// user_id1=\"Jk70Z3Gc5klzfDRVs6li1657790245250\"",
+									"// user_id2=\"gndpyleinxubdentznjgodaheixrgmdi\""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"web_auth_token\", jsonData.data);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"gndpyleinxubdentznjgodaheixrgmdi\"\n}"
+						},
+						"url": {
+							"raw": "{{web.url}}/api/v1/login",
+							"host": [
+								"{{web.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"gndpyleinxubdentznjgodaheixrgmdi\"\n}"
+								},
+								"url": {
+									"raw": "https://cineplex-web-api.cineplexbd.com/api/v1/login",
+									"protocol": "https",
+									"host": [
+										"cineplex-web-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"code\": 200,\n    \"data\": \"hAmazgwFklTnJaNOFfS6iI0mUSC3LKoeZCigel6YHAjU0uMnDhJV6zZr8zYcst6Sdfj3Uoozyjb6WltEoXqs5Xr45ip0FPgIyeHo44vggVdc98gpr6X3U1fj\",\n    \"message\": \"successfully logged in\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/get location All",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"location_id\", jsonData.data[3].id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{web_auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{web.url}}/api/v1/location",
+							"host": [
+								"{{web.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"location"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://cineplex-web-api.cineplexbd.com/api/v1/location",
+									"protocol": "https",
+									"host": [
+										"cineplex-web-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"location"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"location_name\": \"Bashundhara Shopping Mall, Panthapath\",\n            \"short_name\": \"BSC\",\n            \"location_detail\": \"<p>Show Motion Limited&nbsp;<br>Level 8, Bashundhara City&nbsp;<br>13/3 Ka, Panthapath, Tejgaon&nbsp;<br>Dhaka 1205, Bangladesh.</p>\",\n            \"location\": \" Show Motion Limited  Level 8, Bashundhara City  13/3 Ka, Panthapath, Tejgaon  Dhaka 1205, Bangladesh. \"\n        },\n        {\n            \"id\": 2,\n            \"location_name\": \"Shimanto Shambhar, Dhanmondi 2\",\n            \"short_name\": \"SS\",\n            \"location_detail\": \"<p>Shimanto Shamvar<br>Road no 2,Dhanmondi,<br>Dhaka 1205, Bangladesh.</p>\",\n            \"location\": \" Shimanto Shamvar Road no 2,Dhanmondi, Dhaka 1205, Bangladesh. \"\n        },\n        {\n            \"id\": 3,\n            \"location_name\": \"Star Cineplex, SKS Tower, Mohakhali\",\n            \"short_name\": \"CM\",\n            \"location_detail\": \"<p>SKS Tower,<br>Mohakhali,<br>Dhaka 1205, Bangladesh.</p>\",\n            \"location\": \" SKS Tower, Mohakhali, Dhaka 1205, Bangladesh. \"\n        },\n        {\n            \"id\": 4,\n            \"location_name\": \"Star Cineplex, Sony Square\",\n            \"short_name\": \"SSQ\",\n            \"location_detail\": \"<p>Level-4, Plot-1, Road-2, Block-D, Section-2,<br>Mirpur, Dhaka-1216.</p>\",\n            \"location\": \" Level-4, Plot-1, Road-2, Block-D, Section-2, Mirpur, Dhaka-1216. \"\n        },\n        {\n            \"id\": 5,\n            \"location_name\": \"Star Cineplex, Bangabandhu Military Museum\",\n            \"short_name\": \"BMM\",\n            \"location_detail\": \"<p>Bangabandhu Military Museum,<br>Bijoy Shoroni, Dhaka- 1215.</p>\",\n            \"location\": \" Bangabandhu Military Museum, Bijoy Shoroni, Dhaka- 1215. \"\n        }\n    ],\n    \"message\": \"Location list\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/get all show-time",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{web_auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\" : {{location_id}}   \n}"
+						},
+						"url": {
+							"raw": "{{web.url}}/api/v1/movie-show-time",
+							"host": [
+								"{{web.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movie-show-time"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"location\" : {{location_id}}   \n}"
+								},
+								"url": {
+									"raw": "https://cineplex-web-api.cineplexbd.com/api/v1/movie-show-time",
+									"protocol": "https",
+									"host": [
+										"cineplex-web-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"movie-show-time"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"id\": 104,\n            \"movie_detail\": {\n                \"title\": \"Poran (2D)\",\n                \"length\": \"2h 00min\",\n                \"img\": \"https://image.cineplexbd.com/movies/165720319543116.webp\",\n                \"video\": null,\n                \"rating\": \"0.0\",\n                \"category\": \"2D\",\n                \"actor\": \"Yash Rohan\",\n                \"genre\": \"Bangla, Action\",\n                \"release\": \"10-07-2022\",\n                \"language\": \"Bangla\"\n            },\n            \"show_time\": [\n                {\n                    \"date\": \"15th , July 2022\",\n                    \"date_name\": \"Friday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:00 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"01:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"16th , July 2022\",\n                    \"date_name\": \"Saturday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"01:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"17th , July 2022\",\n                    \"date_name\": \"Sunday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"01:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"18th , July 2022\",\n                    \"date_name\": \"Monday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"01:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"19th , July 2022\",\n                    \"date_name\": \"Tuesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"01:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"20th , July 2022\",\n                    \"date_name\": \"Wednesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"01:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": 102,\n            \"movie_detail\": {\n                \"title\": \"Minions: The Rise of Gru 3D\",\n                \"length\": \"1h 28min\",\n                \"img\": \"https://image.cineplexbd.com/movies/165633645132941.webp\",\n                \"video\": null,\n                \"rating\": \"0.0\",\n                \"category\": \"3D\",\n                \"actor\": null,\n                \"genre\": \"English\",\n                \"release\": \"01-07-2022\",\n                \"language\": \"English\"\n            },\n            \"show_time\": [\n                {\n                    \"date\": \"15th , July 2022\",\n                    \"date_name\": \"Friday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:10 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"16th , July 2022\",\n                    \"date_name\": \"Saturday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:10 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"17th , July 2022\",\n                    \"date_name\": \"Sunday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:15 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"18th , July 2022\",\n                    \"date_name\": \"Monday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:15 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"19th , July 2022\",\n                    \"date_name\": \"Tuesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:15 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"20th , July 2022\",\n                    \"date_name\": \"Wednesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:15 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": 101,\n            \"movie_detail\": {\n                \"title\": \"Thor: Love and Thunder (3D)\",\n                \"length\": \"119 Min\",\n                \"img\": \"https://image.cineplexbd.com/movies/165709971894564.webp\",\n                \"video\": \"https://www.youtube.com/watch?v=zlGJfIv3fQM\",\n                \"rating\": \"0.0\",\n                \"category\": \"3D\",\n                \"actor\": \"Chris Pratt, \\tChris Hemsworth,\",\n                \"genre\": \"Action,Adventure,Comedy\",\n                \"release\": \"08-07-2022\",\n                \"language\": \"English\"\n            },\n            \"show_time\": [\n                {\n                    \"date\": \"15th , July 2022\",\n                    \"date_name\": \"Friday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:30 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"02:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"05:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 14,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"16th , July 2022\",\n                    \"date_name\": \"Saturday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:30 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"02:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"08:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"17th , July 2022\",\n                    \"date_name\": \"Sunday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:30 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"02:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"05:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"08:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"18th , July 2022\",\n                    \"date_name\": \"Monday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:30 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"02:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"05:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"08:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"19th , July 2022\",\n                    \"date_name\": \"Tuesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:30 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"02:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"05:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"08:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"20th , July 2022\",\n                    \"date_name\": \"Wednesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:30 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"02:15 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"05:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"08:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 13,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": 103,\n            \"movie_detail\": {\n                \"title\": \"Din: The Day\",\n                \"length\": \"2h 00min\",\n                \"img\": \"https://image.cineplexbd.com/movies/165708679987850.webp\",\n                \"video\": null,\n                \"rating\": null,\n                \"category\": \"2D\",\n                \"actor\": \"Ananta Jalil\",\n                \"genre\": \"Bangla,Action\",\n                \"release\": \"08-07-2022\",\n                \"language\": \"Bangla\"\n            },\n            \"show_time\": [\n                {\n                    \"date\": \"15th , July 2022\",\n                    \"date_name\": \"Friday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"01:45 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:35 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"16th , July 2022\",\n                    \"date_name\": \"Saturday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:00 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"01:50 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"17th , July 2022\",\n                    \"date_name\": \"Sunday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:00 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"18th , July 2022\",\n                    \"date_name\": \"Monday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:00 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"19th , July 2022\",\n                    \"date_name\": \"Tuesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:00 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"20th , July 2022\",\n                    \"date_name\": \"Wednesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"11:00 AM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"04:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        },\n                        {\n                            \"time\": \"07:30 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": 94,\n            \"movie_detail\": {\n                \"title\": \"Thor: Love and Thunder (2D)\",\n                \"length\": \"119 Min\",\n                \"img\": \"https://image.cineplexbd.com/movies/165720386967053.webp\",\n                \"video\": \"https://www.youtube.com/watch?v=tgB1wUcmbbw\",\n                \"rating\": \"0.0\",\n                \"category\": \"2D\",\n                \"actor\": \"Chris Pratt,Taika Waititi,Chris Hemsworth\",\n                \"genre\": \"Action,Adventure,Comedy\",\n                \"release\": \"08-07-2022\",\n                \"language\": \"English\"\n            },\n            \"show_time\": [\n                {\n                    \"date\": \"17th , July 2022\",\n                    \"date_name\": \"Sunday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"02:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"18th , July 2022\",\n                    \"date_name\": \"Monday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"02:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"19th , July 2022\",\n                    \"date_name\": \"Tuesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"02:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                },\n                {\n                    \"date\": \"20th , July 2022\",\n                    \"date_name\": \"Wednesday \",\n                    \"slot\": [\n                        {\n                            \"time\": \"02:00 PM\",\n                            \"hall\": 2,\n                            \"hall_id\": 15,\n                            \"hall_type\": \"Premium\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ],\n    \"message\": \"Show time list.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Single",
+			"item": [
+				{
+					"name": "/get ticket token (Guest Login)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"ticket_auth_token\", jsonData.data.token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"gndpyleinxubdentznjgodaheixrgmdi\"\n}"
+						},
+						"url": {
+							"raw": "{{ticket.url}}/api/v1/guest-login",
+							"host": [
+								"{{ticket.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"guest-login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"gndpyleinxubdentznjgodaheixrgmdi\"\n}"
+								},
+								"url": {
+									"raw": "https://cineplex-ticket-api.cineplexbd.com/api/v1/guest-login",
+									"protocol": "https",
+									"host": [
+										"cineplex-ticket-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"guest-login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"code\": 200,\n    \"data\": {\n        \"name\": \"Guest User 419630\",\n        \"msisdn\": \"01213416104\",\n        \"gender\": \"Male\",\n        \"gender_raw\": 1,\n        \"email\": \"01213416104@cinepelx.com\",\n        \"image\": \"http://sandboxticketadmin.sslwireless.com/uploads/\",\n        \"member_since\": \"Jul 15, 2022\",\n        \"token\": \"yGANIXiwMu4p8Jkbrdm7CcgjfnWeh60SK51HqaTt9O2YFPvZzsBVEQR3UoLlDx\",\n        \"is_guest\": true\n    },\n    \"message\": [\n        \"Login successful.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "/get location-screen",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"location_id\", jsonData.data[3].id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ticket_auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{ticket.url}}/api/v1/get-location",
+							"host": [
+								"{{ticket.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-location"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://cineplex-web-api.cineplexbd.com/api/v1/location",
+									"protocol": "https",
+									"host": [
+										"cineplex-web-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"location"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msgCode\": \"\",\n    \"msg\": \"all location\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"code\": \"BSC\",\n            \"locationTitle\": \"Bashundhara Shopping Mall, Panthapath\",\n            \"address\": \"<p>Show Motion Limited&nbsp;<br>Level 8, Bashundhara City&nbsp;<br>13/3 Ka, Panthapath, Tejgaon&nbsp;<br>Dhaka 1205, Bangladesh.</p>\",\n            \"totalScreen\": 6,\n            \"distId\": 1,\n            \"district\": \"Dhaka\",\n            \"url\": \"http://192.168.0.240:8080/ssl-cineplex-backend-orcl/api/cineplex-api\"\n        },\n        {\n            \"id\": 2,\n            \"code\": \"SMS\",\n            \"locationTitle\": \"Shimanto Shambhar, Dhanmondi 2\",\n            \"address\": \"<p>Shimanto Shamvar<br>Road no 2,Dhanmondi,<br>Dhaka 1205, Bangladesh.</p>\",\n            \"totalScreen\": 3,\n            \"distId\": 1,\n            \"district\": \"Dhaka\",\n            \"url\": \"http://192.168.1.237:8080/ssl-cineplex-backend-orcl/api/cineplex-api\"\n        },\n        {\n            \"id\": 3,\n            \"code\": \"SKS\",\n            \"locationTitle\": \"Star Cineplex, SKS Tower, Mohakhali\",\n            \"address\": \"<p>SKS Tower,<br>Mohakhali,<br>Dhaka 1205, Bangladesh.</p>\",\n            \"totalScreen\": 3,\n            \"distId\": 1,\n            \"district\": \"Dhaka\",\n            \"url\": \"http://192.168.2.4:8080/ssl-cineplex-backend-orcl/api/cineplex-api\"\n        },\n        {\n            \"id\": 4,\n            \"code\": \"Sony\",\n            \"locationTitle\": \"Sony Square STAR CINEPLEX\",\n            \"address\": \"Sony Square STAR CINEPLEX - Mirpur\",\n            \"totalScreen\": 3,\n            \"distId\": 1,\n            \"district\": \"Dhaka\",\n            \"url\": \"http://192.168.3.161:8080/ssl-cineplex-backend-orcl/api/cineplex-api\"\n        },\n        {\n            \"id\": 5,\n            \"code\": \"BMM\",\n            \"locationTitle\": \"Star Cineplex, Bangabandhu Military Museum\",\n            \"address\": \"<p>Bangabandhu Military Museum,<br>Bijoy Shoroni, Dhaka- 1215.</p>\",\n            \"totalScreen\": 1,\n            \"distId\": 1,\n            \"district\": \"Dhaka\",\n            \"url\": \"http://192.168.4.4:8080/ssl-cineplex-backend-orcl/api/cineplex-api\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "/get show-date",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    let select_date = jsonData.data[0];",
+									"    let select_movie = select_date.availableMovies[0];",
+									"",
+									"    pm.environment.set(\"location_id\", select_date.locID);",
+									"    pm.environment.set(\"show_date\", select_date.showDate);",
+									"    pm.environment.set(\"movie_id\", select_movie.movie_id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ticket_auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": 5\n}"
+						},
+						"url": {
+							"raw": "{{ticket.url}}/api/v1/get-showdate",
+							"host": [
+								"{{ticket.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-showdate"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://cineplex-web-api.cineplexbd.com/api/v1/location",
+									"protocol": "https",
+									"host": [
+										"cineplex-web-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"location"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msgCode\": \"\",\n    \"msg\": \"show date list\",\n    \"data\": [\n        {\n            \"locID\": 5,\n            \"showDate\": \"2022-07-15\",\n            \"availableMovies\": [\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1335,\n                    \"movie_title\": \"Top Gun: Maverick\",\n                    \"director_name\": \"Joseph Kosinski\",\n                    \"rating\": null,\n                    \"movie_length\": \"2h 11m\",\n                    \"category\": \"2D\",\n                    \"actor\": \"2h 11m\",\n                    \"genre\": \"English\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-05-27\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165502482875328.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165502482718019.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=giXco2jaZ_4\"\n                }\n            ]\n        },\n        {\n            \"locID\": 5,\n            \"showDate\": \"2022-07-16\",\n            \"availableMovies\": [\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1335,\n                    \"movie_title\": \"Top Gun: Maverick\",\n                    \"director_name\": \"Joseph Kosinski\",\n                    \"rating\": null,\n                    \"movie_length\": \"2h 11m\",\n                    \"category\": \"2D\",\n                    \"actor\": \"2h 11m\",\n                    \"genre\": \"English\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-05-27\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165502482875328.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165502482718019.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=giXco2jaZ_4\"\n                },\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1345,\n                    \"movie_title\": \"Thor: Love and Thunder (3D)\",\n                    \"director_name\": \"Taika Waititi\",\n                    \"rating\": \"0.0\",\n                    \"movie_length\": \"119 Min\",\n                    \"category\": \"3D\",\n                    \"actor\": \"Chris Pratt, \\tChris Hemsworth,\",\n                    \"genre\": \"Action,Adventure,Comedy\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-07-08\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165709971890345.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165709971894564.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=zlGJfIv3fQM\"\n                }\n            ]\n        },\n        {\n            \"locID\": 5,\n            \"showDate\": \"2022-07-17\",\n            \"availableMovies\": [\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1335,\n                    \"movie_title\": \"Top Gun: Maverick\",\n                    \"director_name\": \"Joseph Kosinski\",\n                    \"rating\": null,\n                    \"movie_length\": \"2h 11m\",\n                    \"category\": \"2D\",\n                    \"actor\": \"2h 11m\",\n                    \"genre\": \"English\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-05-27\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165502482875328.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165502482718019.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=giXco2jaZ_4\"\n                },\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1345,\n                    \"movie_title\": \"Thor: Love and Thunder (3D)\",\n                    \"director_name\": \"Taika Waititi\",\n                    \"rating\": \"0.0\",\n                    \"movie_length\": \"119 Min\",\n                    \"category\": \"3D\",\n                    \"actor\": \"Chris Pratt, \\tChris Hemsworth,\",\n                    \"genre\": \"Action,Adventure,Comedy\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-07-08\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165709971890345.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165709971894564.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=zlGJfIv3fQM\"\n                }\n            ]\n        },\n        {\n            \"locID\": 5,\n            \"showDate\": \"2022-07-18\",\n            \"availableMovies\": [\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1335,\n                    \"movie_title\": \"Top Gun: Maverick\",\n                    \"director_name\": \"Joseph Kosinski\",\n                    \"rating\": null,\n                    \"movie_length\": \"2h 11m\",\n                    \"category\": \"2D\",\n                    \"actor\": \"2h 11m\",\n                    \"genre\": \"English\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-05-27\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165502482875328.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165502482718019.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=giXco2jaZ_4\"\n                },\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1345,\n                    \"movie_title\": \"Thor: Love and Thunder (3D)\",\n                    \"director_name\": \"Taika Waititi\",\n                    \"rating\": \"0.0\",\n                    \"movie_length\": \"119 Min\",\n                    \"category\": \"3D\",\n                    \"actor\": \"Chris Pratt, \\tChris Hemsworth,\",\n                    \"genre\": \"Action,Adventure,Comedy\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-07-08\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165709971890345.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165709971894564.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=zlGJfIv3fQM\"\n                }\n            ]\n        },\n        {\n            \"locID\": 5,\n            \"showDate\": \"2022-07-19\",\n            \"availableMovies\": [\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1335,\n                    \"movie_title\": \"Top Gun: Maverick\",\n                    \"director_name\": \"Joseph Kosinski\",\n                    \"rating\": null,\n                    \"movie_length\": \"2h 11m\",\n                    \"category\": \"2D\",\n                    \"actor\": \"2h 11m\",\n                    \"genre\": \"English\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-05-27\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165502482875328.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165502482718019.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=giXco2jaZ_4\"\n                },\n                {\n                    \"movieSynopsis\": null,\n                    \"movie_id\": 1345,\n                    \"movie_title\": \"Thor: Love and Thunder (3D)\",\n                    \"director_name\": \"Taika Waititi\",\n                    \"rating\": \"0.0\",\n                    \"movie_length\": \"119 Min\",\n                    \"category\": \"3D\",\n                    \"actor\": \"Chris Pratt, \\tChris Hemsworth,\",\n                    \"genre\": \"Action,Adventure,Comedy\",\n                    \"language\": \"English\",\n                    \"release\": \"2022-07-08\",\n                    \"cover_image\": \"https://image.cineplexbd.com/movies/165709971890345.webp\",\n                    \"profile_image\": \"https://image.cineplexbd.com/movies/165709971894564.webp\",\n                    \"trailer_url\": \"https://www.youtube.com/watch?v=zlGJfIv3fQM\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "/get shows type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    let select_show = jsonData.data[0].showTimes[0];",
+									"    pm.environment.set(\"program_id\", select_show.programId);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ticket_auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": {{location_id}},\n    \"movieId\": {{movie_id}},\n    \"showDate\": \"{{show_date}}\"\n}"
+						},
+						"url": {
+							"raw": "{{ticket.url}}/api/v1/get-shows",
+							"host": [
+								"{{ticket.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-shows"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://cineplex-web-api.cineplexbd.com/api/v1/location",
+									"protocol": "https",
+									"host": [
+										"cineplex-web-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"location"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msgCode\": \"\",\n    \"msg\": \"successfully retrieved\",\n    \"data\": [\n        {\n            \"locId\": 5,\n            \"movieId\": 1335,\n            \"movieTitle\": \"Top Gun: Maverick\",\n            \"showDate\": \"2022-07-15\",\n            \"screenID\": 16,\n            \"screenTitle\": \"Hall 1\",\n            \"screenTypeID\": 2,\n            \"screenTypeName\": \"Premium\",\n            \"showTimes\": [\n                {\n                    \"programId\": 212,\n                    \"profileId\": 16,\n                    \"showTime\": \"19:30:00\",\n                    \"seatPrices\": [\n                        {\n                            \"seatTypeID\": 1,\n                            \"seatTypeTitle\": \"Premium\",\n                            \"unitPrice\": 350\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "/get seats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 200\", function () {",
+									"//     pm.response.to.have.status(200);",
+									"//     var jsonData = pm.response.json();",
+									"//     pm.environment.set(\"location_id\", jsonData.data[3].id);",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ticket_auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": {{location_id}},\n    \"programId\": {{program_id}}\n}"
+						},
+						"url": {
+							"raw": "{{ticket.url}}/api/v1/get-seat",
+							"host": [
+								"{{ticket.url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-seat"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://cineplex-web-api.cineplexbd.com/api/v1/location",
+									"protocol": "https",
+									"host": [
+										"cineplex-web-api",
+										"cineplexbd",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"location"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msgCode\": \"\",\n    \"msg\": \"successfully retrieved\",\n    \"data\": {\n        \"programId\": 212,\n        \"locId\": 5,\n        \"screenId\": 16,\n        \"totalSeats\": 183,\n        \"movieId\": 1335,\n        \"showDate\": null,\n        \"showTime\": null,\n        \"lastSeatStatusOn\": \"2022-07-15 16:36:54\",\n        \"seatTypes\": [\n            {\n                \"seatTypeId\": 1,\n                \"seatTypeTitle\": \"Premium\",\n                \"seatCapacity\": 0,\n                \"seatRowCount\": 15,\n                \"seatColsCount\": 17,\n                \"dispOrder\": 1,\n                \"seatStatus\": [\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 155,\n                        \"seatTitle\": \"Q1\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 156,\n                        \"seatTitle\": \"Q2\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 157,\n                        \"seatTitle\": \"Q3\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 158,\n                        \"seatTitle\": \"Q4\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 159,\n                        \"seatTitle\": \"Q5\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 160,\n                        \"seatTitle\": \"Q6\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 161,\n                        \"seatTitle\": \"Q7\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 162,\n                        \"seatTitle\": \"Q8\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 163,\n                        \"seatTitle\": \"Q9\",\n                        \"rowPosition\": 1,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 164,\n                        \"seatTitle\": \"P1\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 165,\n                        \"seatTitle\": \"P2\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 166,\n                        \"seatTitle\": \"P3\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 167,\n                        \"seatTitle\": \"P4\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 168,\n                        \"seatTitle\": \"P5\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 169,\n                        \"seatTitle\": \"P6\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 170,\n                        \"seatTitle\": \"P7\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 171,\n                        \"seatTitle\": \"P8\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 172,\n                        \"seatTitle\": \"P9\",\n                        \"rowPosition\": 2,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 173,\n                        \"seatTitle\": \"N1\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 174,\n                        \"seatTitle\": \"N2\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 175,\n                        \"seatTitle\": \"N3\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 176,\n                        \"seatTitle\": \"N4\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 177,\n                        \"seatTitle\": \"N5\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 178,\n                        \"seatTitle\": \"N6\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 179,\n                        \"seatTitle\": \"N7\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 180,\n                        \"seatTitle\": \"N8\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 181,\n                        \"seatTitle\": \"N9\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 182,\n                        \"seatTitle\": \"N10\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 183,\n                        \"seatTitle\": \"N11\",\n                        \"rowPosition\": 3,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 125,\n                        \"seatTitle\": \"M1\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 126,\n                        \"seatTitle\": \"M2\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 127,\n                        \"seatTitle\": \"M3\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 128,\n                        \"seatTitle\": \"M4\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 129,\n                        \"seatTitle\": \"M5\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 130,\n                        \"seatTitle\": \"M6\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 131,\n                        \"seatTitle\": \"M7\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 132,\n                        \"seatTitle\": \"M8\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 133,\n                        \"seatTitle\": \"M9\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 134,\n                        \"seatTitle\": \"M10\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 135,\n                        \"seatTitle\": \"M11\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 136,\n                        \"seatTitle\": \"M12\",\n                        \"rowPosition\": 4,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 137,\n                        \"seatTitle\": \"L1\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 138,\n                        \"seatTitle\": \"L2\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 139,\n                        \"seatTitle\": \"L3\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 140,\n                        \"seatTitle\": \"L4\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 141,\n                        \"seatTitle\": \"L5\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 142,\n                        \"seatTitle\": \"L6\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 143,\n                        \"seatTitle\": \"L7\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 144,\n                        \"seatTitle\": \"L8\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 145,\n                        \"seatTitle\": \"L9\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 146,\n                        \"seatTitle\": \"L10\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 147,\n                        \"seatTitle\": \"L11\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 148,\n                        \"seatTitle\": \"L12\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 149,\n                        \"seatTitle\": \"L13\",\n                        \"rowPosition\": 5,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 150,\n                        \"seatTitle\": \"K1\",\n                        \"rowPosition\": 6,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 151,\n                        \"seatTitle\": \"K2\",\n                        \"rowPosition\": 6,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 152,\n                        \"seatTitle\": \"K3\",\n                        \"rowPosition\": 6,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 153,\n                        \"seatTitle\": \"K4\",\n                        \"rowPosition\": 6,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 154,\n                        \"seatTitle\": \"K5\",\n                        \"rowPosition\": 6,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 25,\n                        \"seatTitle\": \"J1\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 26,\n                        \"seatTitle\": \"J2\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 27,\n                        \"seatTitle\": \"J3\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 28,\n                        \"seatTitle\": \"J4\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 29,\n                        \"seatTitle\": \"J5\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 30,\n                        \"seatTitle\": \"J6\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 31,\n                        \"seatTitle\": \"J7\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 32,\n                        \"seatTitle\": \"J8\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 33,\n                        \"seatTitle\": \"J9\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 34,\n                        \"seatTitle\": \"J10\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 35,\n                        \"seatTitle\": \"J11\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 36,\n                        \"seatTitle\": \"J12\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 37,\n                        \"seatTitle\": \"J13\",\n                        \"rowPosition\": 8,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 38,\n                        \"seatTitle\": \"H1\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 39,\n                        \"seatTitle\": \"H2\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 40,\n                        \"seatTitle\": \"H3\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 41,\n                        \"seatTitle\": \"H4\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 42,\n                        \"seatTitle\": \"H5\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 5,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 43,\n                        \"seatTitle\": \"H6\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 6,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 44,\n                        \"seatTitle\": \"H7\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 45,\n                        \"seatTitle\": \"H8\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 46,\n                        \"seatTitle\": \"H9\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 47,\n                        \"seatTitle\": \"H10\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 48,\n                        \"seatTitle\": \"H11\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 49,\n                        \"seatTitle\": \"H12\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 50,\n                        \"seatTitle\": \"H13\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 51,\n                        \"seatTitle\": \"H14\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 52,\n                        \"seatTitle\": \"H15\",\n                        \"rowPosition\": 10,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 53,\n                        \"seatTitle\": \"G1\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 54,\n                        \"seatTitle\": \"G2\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 55,\n                        \"seatTitle\": \"G3\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 56,\n                        \"seatTitle\": \"G4\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 57,\n                        \"seatTitle\": \"G5\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 5,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 58,\n                        \"seatTitle\": \"G6\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 6,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 59,\n                        \"seatTitle\": \"G7\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 60,\n                        \"seatTitle\": \"G8\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 61,\n                        \"seatTitle\": \"G9\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 62,\n                        \"seatTitle\": \"G10\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 63,\n                        \"seatTitle\": \"G11\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 64,\n                        \"seatTitle\": \"G12\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 65,\n                        \"seatTitle\": \"G13\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 66,\n                        \"seatTitle\": \"G14\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 67,\n                        \"seatTitle\": \"G15\",\n                        \"rowPosition\": 11,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 68,\n                        \"seatTitle\": \"F1\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 69,\n                        \"seatTitle\": \"F2\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 70,\n                        \"seatTitle\": \"F3\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 71,\n                        \"seatTitle\": \"F4\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 72,\n                        \"seatTitle\": \"F5\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 5,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 73,\n                        \"seatTitle\": \"F6\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 6,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 74,\n                        \"seatTitle\": \"F7\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 75,\n                        \"seatTitle\": \"F8\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 76,\n                        \"seatTitle\": \"F9\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 77,\n                        \"seatTitle\": \"F10\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 78,\n                        \"seatTitle\": \"F11\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 79,\n                        \"seatTitle\": \"F12\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 80,\n                        \"seatTitle\": \"F13\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 81,\n                        \"seatTitle\": \"F14\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 82,\n                        \"seatTitle\": \"F15\",\n                        \"rowPosition\": 12,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 83,\n                        \"seatTitle\": \"E1\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 84,\n                        \"seatTitle\": \"E2\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 85,\n                        \"seatTitle\": \"E3\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 86,\n                        \"seatTitle\": \"E4\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 87,\n                        \"seatTitle\": \"E5\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 5,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 88,\n                        \"seatTitle\": \"E6\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 6,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 89,\n                        \"seatTitle\": \"E7\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 90,\n                        \"seatTitle\": \"E8\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 91,\n                        \"seatTitle\": \"E9\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 92,\n                        \"seatTitle\": \"E10\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 93,\n                        \"seatTitle\": \"E11\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 94,\n                        \"seatTitle\": \"E12\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 95,\n                        \"seatTitle\": \"E13\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 96,\n                        \"seatTitle\": \"E14\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 97,\n                        \"seatTitle\": \"E15\",\n                        \"rowPosition\": 13,\n                        \"colPosition\": 17,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 98,\n                        \"seatTitle\": \"D1\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 99,\n                        \"seatTitle\": \"D2\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 100,\n                        \"seatTitle\": \"D3\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 101,\n                        \"seatTitle\": \"D4\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 102,\n                        \"seatTitle\": \"D5\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 5,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 103,\n                        \"seatTitle\": \"D6\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 6,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 104,\n                        \"seatTitle\": \"D7\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 105,\n                        \"seatTitle\": \"D8\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 106,\n                        \"seatTitle\": \"D9\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 107,\n                        \"seatTitle\": \"D10\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 108,\n                        \"seatTitle\": \"D11\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 109,\n                        \"seatTitle\": \"D12\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 110,\n                        \"seatTitle\": \"D13\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 111,\n                        \"seatTitle\": \"D14\",\n                        \"rowPosition\": 14,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 112,\n                        \"seatTitle\": \"C1\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 113,\n                        \"seatTitle\": \"C2\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 114,\n                        \"seatTitle\": \"C3\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 115,\n                        \"seatTitle\": \"C4\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 116,\n                        \"seatTitle\": \"C5\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 5,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 117,\n                        \"seatTitle\": \"C6\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 118,\n                        \"seatTitle\": \"C7\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 119,\n                        \"seatTitle\": \"C8\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 120,\n                        \"seatTitle\": \"C9\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 121,\n                        \"seatTitle\": \"C10\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 122,\n                        \"seatTitle\": \"C11\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 123,\n                        \"seatTitle\": \"C12\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 124,\n                        \"seatTitle\": \"C13\",\n                        \"rowPosition\": 15,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 0\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 1,\n                        \"seatTitle\": \"B1\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 2,\n                        \"seatTitle\": \"B2\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 3,\n                        \"seatTitle\": \"B3\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 4,\n                        \"seatTitle\": \"B4\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 5,\n                        \"seatTitle\": \"B5\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 5,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 6,\n                        \"seatTitle\": \"B6\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 7,\n                        \"seatTitle\": \"B7\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 8,\n                        \"seatTitle\": \"B8\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 9,\n                        \"seatTitle\": \"B9\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 10,\n                        \"seatTitle\": \"B10\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 11,\n                        \"seatTitle\": \"B11\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 12,\n                        \"seatTitle\": \"B12\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 13,\n                        \"seatTitle\": \"B13\",\n                        \"rowPosition\": 16,\n                        \"colPosition\": 16,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 14,\n                        \"seatTitle\": \"A1\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 1,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 15,\n                        \"seatTitle\": \"A2\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 2,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 16,\n                        \"seatTitle\": \"A3\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 3,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 17,\n                        \"seatTitle\": \"A4\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 4,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 18,\n                        \"seatTitle\": \"A5\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 9,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 19,\n                        \"seatTitle\": \"A6\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 10,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 20,\n                        \"seatTitle\": \"A7\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 11,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 21,\n                        \"seatTitle\": \"A8\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 12,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 22,\n                        \"seatTitle\": \"A9\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 13,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 23,\n                        \"seatTitle\": \"A10\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 14,\n                        \"seatStatus\": 1\n                    },\n                    {\n                        \"classId\": 1,\n                        \"seatSeqId\": 24,\n                        \"seatTitle\": \"A11\",\n                        \"rowPosition\": 17,\n                        \"colPosition\": 15,\n                        \"seatStatus\": 1\n                    }\n                ]\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
